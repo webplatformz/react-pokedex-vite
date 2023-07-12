@@ -1,9 +1,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-
-import DetailPage from "./pages/details/DetailPage";
-import ListPage from "./pages/list/ListPage";
-import "./styles/global.scss";
 import { Layout } from "./components/layout/Layout";
+import { DetailPage } from "./pages/details/DetailPage";
+import { ListPage } from "./pages/list/ListPage";
+import "./styles/global.scss";
 
 const router = createBrowserRouter([
   {

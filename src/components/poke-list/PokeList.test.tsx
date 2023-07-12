@@ -4,7 +4,9 @@ import { PokeList } from "./PokeList";
 
 describe("PokeList", () => {
   it("Should render three list elements", () => {
-    render(<PokeList />);
+    render(
+      <PokeList pokemons={[{ name: "a" }, { name: "b" }, { name: "a" }]} />
+    );
     expect(screen.getAllByRole("listitem")).toHaveLength(3);
   });
 });

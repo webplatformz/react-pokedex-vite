@@ -5,4 +5,4 @@ function ListPage() {
   return <PokeList pokemons={pokemonList.results} />;
 }
 
-export default ListPage;
+export { ListPage };

@@ -14,4 +14,4 @@ function DetailPage() {
   );
 }
 
-export default DetailPage;
+export { DetailPage };
