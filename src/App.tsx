@@ -3,6 +3,9 @@ import { Layout } from "./components/layout/Layout";
 import { DetailPage } from "./pages/details/DetailPage";
 import { ListPage } from "./pages/list/ListPage";
 import "./styles/global.scss";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -22,7 +25,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  );
 }
 
 export default App;

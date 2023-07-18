@@ -1,15 +1,24 @@
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { pokeDetails } from "../../mockData/details";
+import { fetcher } from "../../api/fetcher";
+import { PokemonDetailDto } from "../../api/pokeApi";
 
 function DetailPage() {
   const { pokemonName } = useParams<"pokemonName">();
+  const uri = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
 
-  const pokemon = pokeDetails.find((p) => p.name === pokemonName);
+  const { data, isLoading, isError } = useQuery(
+    ["pokemon", "detail", pokemonName],
+    () => fetcher<PokemonDetailDto>(uri)
+  );
+
+  if (isLoading) return <div>LOADING</div>;
+  if (isError) return <div>ERROR while loading data</div>;
 
   return (
     <div>
       <span>{pokemonName}</span>
-      <img src={pokemon?.sprites.front_shiny} alt={pokemonName} />
+      <img src={data.sprites.front_shiny} alt={pokemonName} />
     </div>
   );
 }
