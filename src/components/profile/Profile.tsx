@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
+import styles from "./Profile.module.scss";
 
 type FormValues = { name: string; email: string };
 
@@ -12,30 +13,43 @@ export function Profile() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        type="text"
-        placeholder="Dr. React"
-        {...register("name", {
-          required: { value: true, message: "Name is required!" },
-          maxLength: {
-            value: 25,
-            message: "The name should be shorter than 25 characters!",
-          },
-        })}
-      />
-      {errors?.name?.type && <span>{errors.name.message}</span>}
-      <input
-        type="text"
-        placeholder="react@zuhlke.com"
-        {...register("email", {
-          required: { value: true, message: "The 'email' field is required!" },
-          pattern: {
-            value: /^[A-Z0-9._+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: "Invalid email!",
-          },
-        })}
-      />
-      {errors?.email?.type && <span>{errors.email.message}</span>}
+      <div>
+        <label htmlFor="name">Name: </label>
+        <input
+          type="text"
+          id="name"
+          placeholder="Dr. React"
+          className={errors?.name?.type ? styles.inputError : ""}
+          {...register("name", {
+            required: { value: true, message: "Name is required!" },
+            maxLength: {
+              value: 25,
+              message: "The name should be shorter than 25 characters!",
+            },
+          })}
+        />
+        {errors?.name?.type && <span>{errors.name.message}</span>}
+      </div>
+      <div>
+        <label htmlFor="email">E-Mail: </label>
+        <input
+          type="text"
+          placeholder="react@zuhlke.com"
+          id="email"
+          className={errors?.name?.type ? styles.inputError : ""}
+          {...register("email", {
+            required: {
+              value: true,
+              message: "The 'email' field is required!",
+            },
+            pattern: {
+              value: /^[A-Z0-9._+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Invalid email!",
+            },
+          })}
+        />
+        {errors?.email?.type && <span>{errors.email.message}</span>}
+      </div>
       <input type="submit" value="save" />
     </form>
   );
