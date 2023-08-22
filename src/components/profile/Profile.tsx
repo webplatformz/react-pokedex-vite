@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import styles from "./Profile.module.scss";
+import { useUserContext } from "../../state/UserContext";
 
 type FormValues = { name: string; email: string };
 
@@ -9,7 +10,10 @@ export function Profile() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+
+  const { setUsername } = useUserContext();
+
+  const onSubmit: SubmitHandler<FormValues> = (data) => setUsername(data.name);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

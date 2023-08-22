@@ -5,6 +5,8 @@ import { ListPage } from "./pages/list/ListPage";
 import "./styles/global.scss";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ProfilePage } from "./pages/profile/ProfilePage";
+import { useState } from "react";
+import { UserContext } from "./state/UserContext";
 
 const queryClient = new QueryClient();
 
@@ -30,10 +32,19 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const [username, setUsername] = useState("");
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <UserContext.Provider
+      value={{
+        username,
+        setUsername,
+      }}
+    >
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </UserContext.Provider>
   );
 }
 
