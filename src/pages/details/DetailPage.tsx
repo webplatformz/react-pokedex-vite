@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetcher } from "../../api/fetcher";
 import { PokemonDetailDto } from "../../api/pokeApi";
-import { useEffect } from "react";
 import { usePokeVisitContext } from "../../state/PokeVisitContext";
 
 function DetailPage() {
@@ -14,7 +14,7 @@ function DetailPage() {
     queryFn: () => fetcher<PokemonDetailDto>(uri),
   });
 
-  const { state, dispatch } = usePokeVisitContext();
+  const { dispatch } = usePokeVisitContext();
 
   useEffect(() => {
     pokemonName &&
@@ -30,7 +30,6 @@ function DetailPage() {
   return (
     <div>
       <h1>{pokemonName}</h1>
-      <h2>{`This is the pokemon #${state.length} you visit`}</h2>
       <img src={data?.sprites.front_shiny} alt={pokemonName} />
     </div>
   );
