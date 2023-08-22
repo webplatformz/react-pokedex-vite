@@ -4,6 +4,7 @@ import { DetailPage } from "./pages/details/DetailPage";
 import { ListPage } from "./pages/list/ListPage";
 import "./styles/global.scss";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ProfilePage } from "./pages/profile/ProfilePage";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "pokemon/:pokemonName",
         element: <DetailPage />,
+      },
+      {
+        path: "profile",
+        element: <ProfilePage />,
       },
     ],
   },
