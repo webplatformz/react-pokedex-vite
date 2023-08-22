@@ -1,6 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import styles from "./Layout.module.scss";
 import { useUserContext } from "../../state/UserContext";
+import { VisitCounter } from "./Visitcounter";
 
 export function Layout() {
   const { username } = useUserContext();
@@ -10,7 +11,8 @@ export function Layout() {
         <nav>
           <Link to="/pokemon">Home</Link> | <Link to="/profile">Profile</Link>
         </nav>
-        {username && <span>{`Hello, ${username}`}</span>}
+        <VisitCounter />
+        <span>{username && `Hello, ${username}`}</span>
       </header>
       <main>
         <Outlet />
