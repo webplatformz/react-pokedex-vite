@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import styles from "./Profile.module.scss";
 import { useWindowPaste } from "./useWindowPaste";
+import { useUserContext } from "../../state/UserContext";
 
 type FormValues = { name: string; email: string };
 
@@ -11,7 +12,10 @@ export function Profile() {
     formState: { errors },
     setValue,
   } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+
+  const { setUsername } = useUserContext();
+
+  const onSubmit: SubmitHandler<FormValues> = (data) => setUsername(data.name);
 
   useWindowPaste((value) => setValue("name", `Dr. ${value}`));
 
