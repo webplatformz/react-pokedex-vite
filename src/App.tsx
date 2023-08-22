@@ -7,6 +7,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ProfilePage } from "./pages/profile/ProfilePage";
 import { useState } from "react";
 import { UserContext } from "./state/UserContext";
+import { usePokeVisit } from "./hooks/usePokeVisit/usePokeVisit";
+import { PokeVisitContext } from "./state/PokeVisitContext";
 
 const queryClient = new QueryClient();
 
@@ -34,17 +36,21 @@ const router = createBrowserRouter([
 function App() {
   const [username, setUsername] = useState("");
 
+  const pokeVisit = usePokeVisit();
+
   return (
-    <UserContext.Provider
-      value={{
-        username,
-        setUsername,
-      }}
-    >
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </UserContext.Provider>
+    <PokeVisitContext.Provider value={pokeVisit}>
+      <UserContext.Provider
+        value={{
+          username,
+          setUsername,
+        }}
+      >
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </UserContext.Provider>
+    </PokeVisitContext.Provider>
   );
 }
 
