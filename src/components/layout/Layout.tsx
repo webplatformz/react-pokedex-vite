@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import styles from "./Layout.module.scss";
 import { useUserContext } from "../../state/UserContext";
-import { VisitCounter } from "./Visitcounter";
+import { VisitCounter } from "./VisitCounter";
 
 export function Layout() {
   const { username } = useUserContext();
