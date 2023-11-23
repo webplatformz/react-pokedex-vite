@@ -14,9 +14,7 @@ export function Profile() {
         onChange={(e) => setUsername(e.target.value)}
       />
 
-      <span className={styles.output}>
-        {username.length > 0 && `Hello, ${username}`}
-      </span>
+      <span className={styles.output}>Hello, ${username}</span>
     </>
   );
 }
