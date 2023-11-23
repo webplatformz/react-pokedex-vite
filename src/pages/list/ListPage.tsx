@@ -5,7 +5,7 @@ import { PokeList } from "../../components/poke-list/PokeList";
 
 function ListPage() {
   const { data, isLoading, isError } = useQuery(["pokemonList"], () =>
-    fetcher<PokemonResultDto>("https://pokeapi.co/api/v2/pokemon?limit=1000")
+    fetcher<PokemonResultDto>("https://pokeapi.co/api/v2/pokemon")
   );
 
   if (isLoading) return <div>LOADING</div>;
