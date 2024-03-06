@@ -1,13 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetcher } from "../../api/fetcher";
-import { PokemonResultDto } from "../../api/pokeApi";
+import { PokemonListDto } from "../../api/pokeApi";
 import { PokeList } from "../../components/poke-list/PokeList";
 
 function ListPage() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["pokemonList"],
-    queryFn: () =>
-      fetcher<PokemonResultDto>("https://pokeapi.co/api/v2/pokemon"),
+    queryFn: () => fetcher<PokemonListDto>("https://pokeapi.co/api/v2/pokemon"),
   });
 
   if (isLoading) return <div>LOADING</div>;
