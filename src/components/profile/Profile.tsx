@@ -4,6 +4,7 @@ import { useWindowPaste } from "./useWindowPaste";
 
 type FormValues = { name: string; email: string };
 
+
 export function Profile() {
   const {
     register,
