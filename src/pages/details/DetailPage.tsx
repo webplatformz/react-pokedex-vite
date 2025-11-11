@@ -17,11 +17,12 @@ function DetailPage() {
   const { dispatch } = usePokeVisitContext();
 
   useEffect(() => {
-    pokemonName &&
+    if (pokemonName) {
       dispatch({
         type: "add",
         value: pokemonName,
       });
+    }
   }, [dispatch, pokemonName]);
 
   if (isLoading) return <div>LOADING</div>;
