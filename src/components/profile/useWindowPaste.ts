@@ -1,16 +1,16 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 
 export function useWindowPaste(onPasted: (value: string) => void) {
-  const hanndlePaste = useCallback(
-    (event: ClipboardEvent) => {
-      const value = event.clipboardData?.getData("Text");
-      value && onPasted(value);
-    },
-    [onPasted]
-  );
-
   useEffect(() => {
-    window.addEventListener("paste", hanndlePaste);
-    return () => window.removeEventListener("paste", hanndlePaste);
-  }, [hanndlePaste]);
+    const handlePaste = (event: ClipboardEvent) => {
+      const value = event.clipboardData?.getData("Text");
+      if (value) {
+        onPasted(value);
+      }
+    };
+
+    window.addEventListener("paste", handlePaste);
+
+    return () => window.removeEventListener("paste", handlePaste);
+  }, [onPasted]);
 }
