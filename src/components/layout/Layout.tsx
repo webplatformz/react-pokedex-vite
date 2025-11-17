@@ -1,10 +1,14 @@
 import { Link, Outlet } from "react-router";
 import styles from "./Layout.module.scss";
-import { useUserContext } from "../../state/UserContext";
 import { VisitCounter } from "./VisitCounter";
+import { profileService } from "../../db/profileService";
+import type { Route } from "./+types/Layout";
 
-function Layout() {
-  const { username } = useUserContext();
+export const loader = () => {
+  return profileService.getProfile();
+};
+
+function Layout({ loaderData }: Route.ComponentProps) {
   return (
     <div className={styles.root}>
       <header>
@@ -12,7 +16,7 @@ function Layout() {
           <Link to="/pokemon">Home</Link> | <Link to="/profile">Profile</Link>
         </nav>
         <VisitCounter />
-        <span>{username && `Hello, ${username}`}</span>
+        <span>{loaderData?.name && `Hello, ${loaderData.name}`}</span>
       </header>
       <main>
         <Outlet />
